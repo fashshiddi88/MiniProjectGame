@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Enemy
 {
     private float speed = 2f;
 
@@ -38,4 +38,6 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    
 }

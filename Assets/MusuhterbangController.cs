@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusuhterbangController : MonoBehaviour
+public class MusuhterbangController : Enemy
 {
-    private float speed = 2f;
-
+    private float speed = 5f;
     public bool moveUp;
 
 
@@ -38,4 +37,5 @@ public class MusuhterbangController : MonoBehaviour
             }
         }
     }
+   
 }

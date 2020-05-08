@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Collider2D coll;
 
     
-    private enum State {idle, running, hurt}
+    private enum State {idle, running, jumping, falling, hurt}
     private State state = State.idle;
 
 
@@ -61,17 +61,26 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            state = State.hurt;
-            health -= 1;
-            healthAmount.text = health.ToString();
-            HandleHealth();
-            if (other.gameObject.transform.position.x > transform.position.x)
+            
+            if (state == State.falling)
             {
-                rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+                Destroy(other.gameObject);
+                Jump();
             }
             else
             {
-                rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+                state = State.hurt;
+                health -= 1;
+                healthAmount.text = health.ToString();
+                HandleHealth();
+                if (other.gameObject.transform.position.x > transform.position.x)
+                {
+                    rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+                }
             }
         }
     }
@@ -80,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("GameOverScene");
         }
     }
 
@@ -103,13 +112,32 @@ public class PlayerController : MonoBehaviour
         //jump
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(ground))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            Jump();
         }
+    }
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        state = State.jumping;
     }
 
     private void AnimationState()
     {
-        if (state == State.hurt)
+        if (state == State.jumping)
+        {
+            if (rb.velocity.y < .1f)
+            {
+                state = State.falling;
+            }
+            else if (state == State.falling)
+            {
+                if (coll.IsTouchingLayers(ground))
+                {
+                    state = State.idle;
+                }
+            }
+        }
+        else if (state == State.hurt)
         {
             if (Mathf.Abs(rb.velocity.x) < .1f)
             {

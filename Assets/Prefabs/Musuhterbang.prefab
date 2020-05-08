@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7343296932011007175}
-  m_LocalRotation: {x: -0, y: -0, z: -0.70726186, w: 0.70695174}
+  m_LocalRotation: {x: 0, y: 0, z: -0.707261, w: 0.7069525}
   m_LocalPosition: {x: 110.8, y: -2.4, z: 1.0351562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -140,6 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d92d8b92748bea4e8342656a01c12c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  deathEffect: {fileID: 154381562761693371, guid: 2b166b8045daf7c47bed2aaa1dc6b61d,
+    type: 3}
   moveUp: 0
 --- !u!50 &7343296932011007173
 Rigidbody2D:
