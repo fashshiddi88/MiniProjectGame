@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private int diamonds = 0;
     [SerializeField] private TextMeshProUGUI diamondText;
-    [SerializeField] private float hurtForce = 10f;
+    [SerializeField] private float hurtForce = 5f;
     [SerializeField] private int health;
     [SerializeField] private TextMeshProUGUI healthAmount;
 
